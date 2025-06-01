@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Basic Load Forecast</h2>
+<form method="post">
+  {% csrf_token %}
+  <label>Voltage:</label><input type="number" step="any" name="voltage"><br>
+  <label>Current:</label><input type="number" step="any" name="current"><br>
+  <label>Temperature:</label><input type="number" step="any" name="temperature"><br>
+  <label>Vibration:</label><input type="number" step="any" name="vibration"><br>
+  <label>Speed:</label><input type="number" step="any" name="speed"><br>
+  <input type="submit" value="Forecast">
+</form>
+
+{% if result %}
+  <h3>{{ result }}</h3>
+{% endif %}
+{% endblock %}
