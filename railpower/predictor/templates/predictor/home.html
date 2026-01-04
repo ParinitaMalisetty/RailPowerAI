@@ -1,46 +1,70 @@
-<!-- templates/predictor/home.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Railway Safety & Load Forecasting</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        a.button {
-            text-decoration: none;
-            padding: 20px 30px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-        a.button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Railway Power Line Fault Detection & Load Forecasting</h1>
-    <div class="button-container">
-        <a class="button" href="{% url 'classify_basic' %}">Basic Fault Classification</a>
-        <a class="button" href="{% url 'classify_scaled' %}">Scaled Fault Classification</a>
-        <a class="button" href="{% url 'forecast_basic' %}">Basic Load Forecasting</a>
-        <a class="button" href="{% url 'forecast_scaled' %}">Scaled Load Forecasting</a>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-container">
+  <div class="card-box text-center">
+
+    <h2 class="title">RailPower AI 🚆⚡</h2>
+    <p class="subtitle">
+      Machine Learning for Safety & Sustainability in Railways
+    </p>
+
+    <!-- Abstract Section -->
+    <div class="text-muted mb-4" style="font-size: 15px;">
+      <strong style="color:#4CAF50;">Abstract:</strong><br>
+      This project applies supervised machine learning techniques to enhance
+      railway operational safety and energy sustainability. Using electrical
+      and mechanical sensor data, the system detects powerline faults and
+      forecasts load demand to support proactive maintenance and planning.
     </div>
-</body>
-</html>
+
+    <!-- Feature Cards -->
+    <div class="row g-3 mb-4">
+
+      <div class="col-6">
+        <div class="p-3 rounded bg-light border feature-card">
+          ⚠ <strong>Fault Classification</strong>
+          <div class="small text-muted mt-1">
+            Detect abnormal powerline conditions
+          </div>
+          <div class="model-badge">Random Forest</div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3 rounded bg-light border feature-card">
+          📈 <strong>Load Forecasting</strong>
+          <div class="small text-muted mt-1">
+            Predict power consumption trends
+          </div>
+          <div class="model-badge">Decision Tree</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-grid gap-3">
+      <a href="{% url 'classify_basic' %}" class="btn-main">
+        Basic Fault Classification
+      </a>
+      <a href="{% url 'classify_scaled' %}" class="btn-main">
+        Scaled Fault Classification
+      </a>
+      <a href="{% url 'forecast_basic' %}" class="btn-main">
+        Basic Load Forecast
+      </a>
+      <a href="{% url 'forecast_scaled' %}" class="btn-main">
+        Scaled Load Forecast
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-4 text-muted small">
+      Academic Project · Railway Electrification · Machine Learning Models
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -2,32 +2,186 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Railway Fault & Load Prediction System</title>
+    <title>RailPower AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Optional: Add Bootstrap for styling -->
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .page-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .card-box {
+            width: 100%;
+            max-width: 520px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #4CAF50, #2e7d32);
+            border: none;
+        }
+
+        .btn-main:hover {
+            opacity: 0.95;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            font-weight: 600;
+        }
+        /* Improve muted text visibility in dark mode */
+body.dark .text-muted {
+  color: #bdbdbd !important;
+}
+
+        <style>
+/* ---------- Animations ---------- */
+.card-box {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Buttons ---------- */
+.btn-main {
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #4CAF50, #2e7d32);
+  color: white;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(76,175,80,0.35);
+  color: white;
+}
+
+/* ---------- Feature Cards ---------- */
+.feature-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* ---------- Model Badge ---------- */
+.model-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ---------- Dark Mode ---------- */
+body.dark {
+  background-color: #121212 !important;
+  color: #e0e0e0;
+}
+
+body.dark .card-box {
+  background: #1e1e1e;
+}
+
+body.dark .bg-light {
+  background-color: #2a2a2a !important;
+}
+
+body.dark .navbar {
+  background-color: #000 !important;
+}
+
+.toggle-dark {
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+}
+</style>
+
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-        <a class="navbar-brand" href="/">RailPower AI</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'classify_basic' %}">Fault (Raw)</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'classify_scaled' %}">Fault (Scaled)</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'forecast_basic' %}">Load (Raw)</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'forecast_scaled' %}">Load (Scaled)</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        {% block content %}
-        <!-- Child templates will render here -->
-        {% endblock %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}">RailPower AI</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'classify_basic' %}">Fault (Raw)</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'classify_scaled' %}">Fault (Scaled)</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'forecast_basic' %}">Load (Raw)</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'forecast_scaled' %}">Load (Scaled)</a></li>
+        </ul>
     </div>
+    <span class="toggle-dark ms-auto" onclick="toggleDarkMode()">
+  🌙 Dark Mode
+</span>
+
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+<script>
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+</script>
 
 </body>
 </html>

@@ -1,18 +1,29 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
-<h2>Basic Load Forecast</h2>
-<form method="post">
-  {% csrf_token %}
-  <label>Voltage:</label><input type="number" step="any" name="voltage"><br>
-  <label>Current:</label><input type="number" step="any" name="current"><br>
-  <label>Temperature:</label><input type="number" step="any" name="temperature"><br>
-  <label>Vibration:</label><input type="number" step="any" name="vibration"><br>
-  <label>Speed:</label><input type="number" step="any" name="speed"><br>
-  <input type="submit" value="Forecast">
-</form>
 
-{% if result %}
-  <h3>{{ result }}</h3>
-{% endif %}
+<div class="page-container">
+  <div class="card-box">
+    <h3 class="title">Basic Load Forecast</h3>
+    <p class="subtitle">Raw sensor values</p>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <input class="form-control mb-3" type="number" step="any" name="Voltage" placeholder="Voltage (V)" required>
+      <input class="form-control mb-3" type="number" step="any" name="Current" placeholder="Current (A)" required>
+      <input class="form-control mb-3" type="number" step="any" name="Temperature" placeholder="Temperature (°C)" required>
+      <input class="form-control mb-3" type="number" step="any" name="Vibration" placeholder="Vibration (mm/s)" required>
+      <input class="form-control mb-3" type="number" step="any" name="Speed" placeholder="Speed (km/h)" required>
+
+      <button class="btn btn-main">Forecast Load</button>
+    </form>
+
+    {% if result %}
+      <div class="result-box">
+        Predicted Load: {{ result }} kW
+      </div>
+    {% endif %}
+  </div>
+</div>
+
 {% endblock %}
